@@ -1,8 +1,10 @@
 const TableRow = ({ children } = {}) => {
-  const tr = document.createElement('tr');
-  children && tr.appendChild(children);
+  const element = document.createElement('tr');
+  if (children) {
+    element.appendChild(children);
+  }
 
-  return tr;
+  return element;
 };
 
 export default TableRow;

@@ -1,5 +1,6 @@
-export const active = [
+const active = [
   {
+    id: 1,
     name: 'Shopping list',
     created: '2021-10-10T00:00:00.000Z',
     category: 'Task',
@@ -7,6 +8,7 @@ export const active = [
     dates: null,
   },
   {
+    id: 2,
     name: 'The theory of evolut...',
     created: '2021-10-09T00:00:00.000Z',
     category: 'Random Thought',
@@ -14,6 +16,7 @@ export const active = [
     dates: null,
   },
   {
+    id: 3,
     name: 'New Feature',
     created: '2021-10-08T00:00:00.000Z',
     category: 'Idea',
@@ -21,6 +24,7 @@ export const active = [
     dates: ['2021-10-06T00:00:00.000Z', '2021-10-08T00:00:00.000Z'],
   },
   {
+    id: 4,
     name: 'William Gadies',
     created: '2021-10-07T00:00:00.000Z',
     category: 'Quote',
@@ -28,6 +32,7 @@ export const active = [
     dates: null,
   },
   {
+    id: 5,
     name: 'Books',
     created: '2021-10-06T00:00:00.000Z',
     category: 'Task',
@@ -36,8 +41,9 @@ export const active = [
   },
 ];
 
-export const archived = [
+const archived = [
   {
+    id: 6,
     name: 'Call Billy',
     created: '2021-10-05T00:00:00.000Z',
     category: 'Task',
@@ -45,6 +51,7 @@ export const archived = [
     dates: null,
   },
   {
+    id: 7,
     name: 'GYM',
     created: '2021-04-10T00:00:00.000Z',
     category: 'Task',
@@ -52,3 +59,5 @@ export const archived = [
     dates: null,
   },
 ];
+
+export default { active, archived };

@@ -9,6 +9,20 @@ thead {
   color: #fff;
 }
 
+tbody > tr > * {
+  color: $gray-600 !important;
+}
+
 .material-icons.md-light {
   color: rgba(255, 255, 255, 1);
+}
+
+#activeNotes {
+  .icons-cell {
+    width: 100px;
+  }
+
+  .avatar {
+    background-color: $gray-600;
+  }
 }

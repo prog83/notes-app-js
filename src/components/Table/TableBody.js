@@ -1,8 +1,10 @@
 const TableBody = ({ children } = {}) => {
-  const tbody = document.createElement('tbody');
-  children && tbody.appendChild(children);
+  const element = document.createElement('tbody');
+  if (children) {
+    element.appendChild(children);
+  }
 
-  return tbody;
+  return element;
 };
 
 export default TableBody;

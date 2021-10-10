@@ -1,9 +1,11 @@
 const Table = ({ className, children }) => {
-  const table = document.createElement('table');
-  table.className = `table${className ? ` ${className}` : ''}`;
-  children && table.appendChild(children);
+  const element = document.createElement('table');
+  element.className = `table${className ? ` ${className}` : ''}`;
+  if (children) {
+    element.appendChild(children);
+  }
 
-  return table;
+  return element;
 };
 
 export default Table;

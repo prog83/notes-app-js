@@ -1,11 +1,13 @@
 const TableHead = ({ className, children } = {}) => {
-  const thead = document.createElement('thead');
+  const element = document.createElement('thead');
   if (className) {
-    thead.className = className;
+    element.className = className;
   }
-  children && thead.appendChild(children);
+  if (children) {
+    element.appendChild(children);
+  }
 
-  return thead;
+  return element;
 };
 
 export default TableHead;

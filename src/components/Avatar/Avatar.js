@@ -1,11 +1,13 @@
 import './avatar.scss';
 
 const Avatar = ({ className, children }) => {
-  const avatar = document.createElement('div');
-  avatar.className = `avatar${className ? ` ${className}` : ''}`;
-  children && avatar.appendChild(children);
+  const element = document.createElement('div');
+  element.className = `avatar${className ? ` ${className}` : ''}`;
+  if (children) {
+    element.appendChild(children);
+  }
 
-  return table;
+  return element;
 };
 
 export default Avatar;

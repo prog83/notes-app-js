@@ -1,6 +1,15 @@
 .avatar {
+  position: relative;
+
   width: 36px;
   height: 36px;
   border-radius: 50%;
   background-color: #000;
+  color: #fff;
+  > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

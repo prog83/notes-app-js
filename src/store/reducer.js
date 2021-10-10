@@ -43,14 +43,14 @@ const reducer = (state = {}, action) => {
     case constants.NOTE_DELETE:
       return {
         ...state,
-        activeNotes: del(activeNotes, action.payload),
+        activeNotes: del(state.activeNotes, action.payload),
       };
 
     case constants.NOTE_ARCHIVE:
       return {
         ...state,
-        activeNotes: del(activeNotes, action.payload),
-        archivedNotes: insert(archivedNotes, action.payload),
+        activeNotes: del(state.activeNotes, action.payload),
+        archivedNotes: insert(state.archivedNotes, action.payload),
       };
 
     default:

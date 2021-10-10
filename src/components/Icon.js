@@ -1,9 +1,9 @@
 const Icon = (name) => {
-  const icon = document.createElement('span');
-  icon.className = 'material-icons';
-  icon.textContent = name;
+  const element = document.createElement('span');
+  element.className = 'material-icons';
+  element.textContent = name;
 
-  return icon;
+  return element;
 };
 
 export default Icon;
