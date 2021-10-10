@@ -1,6 +1,6 @@
 const constants = {
-  NOTES_ACTIVE_INIT: 'notes-active/init',
-  NOTES_ARCHIVED_INIT: 'notes-archived/init',
+  NOTES_INIT: 'notes/init',
+  MODE_ARCHIVED: 'mode/archived',
   NOTE_CREATE: 'note/create',
   NOTE_UPDATE: 'note/update',
   NOTE_DELETE: 'note/delete',

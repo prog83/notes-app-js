@@ -1,4 +1,4 @@
-const active = [
+const notes = [
   {
     id: 1,
     name: 'Shopping list',
@@ -39,11 +39,9 @@ const active = [
     content: 'The Learn Startup',
     dates: null,
   },
-];
-
-const archived = [
   {
     id: 6,
+    archived: true,
     name: 'Call Billy',
     created: '2021-10-05T00:00:00.000Z',
     category: 'Task',
@@ -52,12 +50,22 @@ const archived = [
   },
   {
     id: 7,
+    archived: true,
     name: 'GYM',
     created: '2021-04-10T00:00:00.000Z',
     category: 'Task',
     content: 'Pool',
     dates: null,
   },
+  {
+    id: 8,
+    archived: true,
+    name: 'Text',
+    created: '2021-10-07T00:00:00.000Z',
+    category: 'Quote',
+    content: 'Text text text',
+    dates: null,
+  },
 ];
 
-export default { active, archived };
+export default notes;

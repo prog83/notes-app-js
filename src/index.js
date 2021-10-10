@@ -1,17 +1,18 @@
 import 'bootstrap';
 import './styles/global.scss';
 
-import ActiveNotes from './components/ActiveNotes';
+import ListNotes from './components/ListNotes';
+import SummaryNotes from './components/SummaryNotes';
+
 import store from './store';
-import { initActiveNotes, initArchiveNotes } from './store/actions';
+import { initNotes } from './store/actions';
 import initData from './helpers/initData';
 import schema from './helpers/schema';
 
 // Type cast
-const active = schema.cast(initData.active);
-const archived = schema.cast(initData.archived);
+const notes = schema.cast(initData);
 
-store.subscribe(ActiveNotes);
+store.subscribe(ListNotes);
+store.subscribe(SummaryNotes);
 
-store.dispatch(initActiveNotes(active));
-store.dispatch(initArchiveNotes(archived));
+store.dispatch(initNotes(notes));

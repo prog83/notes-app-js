@@ -1,15 +1,15 @@
 import constants from './constants';
 
-export function initActiveNotes(value) {
+export function initNotes(value) {
   return {
-    type: constants.NOTES_ACTIVE_INIT,
+    type: constants.NOTES_INIT,
     payload: value,
   };
 }
 
-export function initArchiveNotes(value) {
+export function setModeActived(value) {
   return {
-    type: constants.NOTES_ARCHIVED_INIT,
+    type: constants.MODE_ARCHIVED,
     payload: value,
   };
 }

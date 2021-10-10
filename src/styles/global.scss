@@ -7,21 +7,32 @@ body {
 thead {
   background-color: $gray-500;
   color: #fff;
+  > tr > * {
+    vertical-align: middle;
+  }
 }
 
 tbody > tr > * {
   color: $gray-600 !important;
+  vertical-align: middle;
 }
 
 .material-icons.md-light {
   color: rgba(255, 255, 255, 1);
 }
 
-#activeNotes {
-  .icons-cell {
-    width: 100px;
-  }
+.w60 {
+  width: 60px;
+}
 
+#listNotes {
+  .icons-cell {
+    width: 165px;
+  }
+}
+
+#listNotes,
+#summaryNotes {
   .avatar {
     background-color: $gray-600;
   }

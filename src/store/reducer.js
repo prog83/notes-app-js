@@ -8,7 +8,7 @@ const insert = (array, value) => {
 
 const update = (array, value) =>
   array.map((item) => {
-    if (item.id !== value.id) {
+    if (item.id !== Number.parseInt(value.id, 10)) {
       return item;
     }
 
@@ -18,40 +18,42 @@ const update = (array, value) =>
     };
   });
 
-const del = (array, value) => array.filter(({ id }) => id !== value);
+const del = (array, value) => array.filter(({ id }) => id !== Number.parseInt(value, 10));
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
-    case constants.NOTES_ACTIVE_INIT:
-      return { ...state, activeNotes: action.payload };
+    case constants.NOTES_INIT:
+      return { ...state, notes: action.payload };
 
-    case constants.NOTES_ARCHIVED_INIT:
-      return { ...state, archivedNotes: action.payload };
+    case constants.MODE_ARCHIVED:
+      return { ...state, actived: action.payload };
 
     case constants.NOTE_CREATE:
       return {
         ...state,
-        activeNotes: insert(state.activeNotes, action.payload),
+        notes: insert(state.notes, action.payload),
       };
 
     case constants.NOTE_UPDATE:
       return {
         ...state,
-        activeNotes: update(state.activeNotes, action.payload),
+        notes: update(state.notes, action.payload),
       };
 
     case constants.NOTE_DELETE:
       return {
         ...state,
-        activeNotes: del(state.activeNotes, action.payload),
+        notes: del(state.notes, action.payload),
       };
 
-    case constants.NOTE_ARCHIVE:
+    case constants.NOTE_ARCHIVE: {
+      const [note] = state.notes.filter(({ id }) => id === Number.parseInt(action.payload, 10));
+
       return {
         ...state,
-        activeNotes: del(state.activeNotes, action.payload),
-        archivedNotes: insert(state.archivedNotes, action.payload),
+        notes: update(state.notes, { ...note, archived: true }),
       };
+    }
 
     default:
       return state;
