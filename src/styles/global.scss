@@ -1,0 +1,14 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+thead {
+  background-color: $gray-500;
+  color: #fff;
+}
+
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
