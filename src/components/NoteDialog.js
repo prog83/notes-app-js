@@ -11,7 +11,7 @@ const form = document.querySelector('#createNoteModal form');
 
 const fields = form.querySelectorAll('input[type=text], select, textarea');
 
-const getDataForm = () => [...fields].reduce((acc, { name, value = '' }) => ({ ...acc, [name]: value }), {});
+const getDataForm = () => Array.from(fields).reduce((acc, { name, value = '' }) => ({ ...acc, [name]: value }), {});
 
 const fillDataForm = (id) => {
   const note = getNoteById(store.state.notes, id);
