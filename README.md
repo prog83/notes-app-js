@@ -2,6 +2,8 @@
 
 Notes App
 
+GitHub Pages [demo](https://prog83.github.io/notes-app-js).
+
 ## Installation
 
 Download or git clone [source code](https://github.com/prog83/notes-app-js).
