@@ -10,7 +10,7 @@ const createTableHead = () => {
   const tableHead = TableHead();
   const row = TableRow();
 
-  const categoryAvatarCell = TableCell({ className: 'w60' });
+  const categoryAvatarCell = TableCell();
   row.appendChild(categoryAvatarCell);
 
   headCells.forEach(({ text, align }) => {

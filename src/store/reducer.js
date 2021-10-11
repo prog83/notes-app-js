@@ -31,7 +31,8 @@ const reducer = (state = {}, action) => {
       return { ...state, notes: action.payload };
 
     case constants.MODE_ARCHIVED:
-      return { ...state, actived: action.payload };
+      console.log(action.payload);
+      return { ...state, modeArchived: action.payload };
 
     case constants.NOTE_CREATE:
       return {
@@ -52,11 +53,21 @@ const reducer = (state = {}, action) => {
       };
 
     case constants.NOTE_ARCHIVE: {
+      console.log(action.payload);
       const note = getNoteById(state.notes, action.payload);
 
       return {
         ...state,
         notes: update(state.notes, { ...note, archived: true }),
+      };
+    }
+
+    case constants.NOTE_UNARCHIVE: {
+      const note = getNoteById(state.notes, action.payload);
+
+      return {
+        ...state,
+        notes: update(state.notes, { ...note, archived: false }),
       };
     }
 

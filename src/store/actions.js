@@ -41,3 +41,10 @@ export function archiveNote(value) {
     payload: value,
   };
 }
+
+export function unarchiveNote(value) {
+  return {
+    type: constants.NOTE_UNARCHIVE,
+    payload: value,
+  };
+}

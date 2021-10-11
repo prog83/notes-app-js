@@ -5,11 +5,21 @@ import IconButton from './IconButton';
 import Icon from './Icon';
 
 import store from '../store';
-import { archiveNote, deleteNote } from '../store/actions';
+import { archiveNote, unarchiveNote, deleteNote, setModeActived } from '../store/actions';
 
 import { getCategoryAvatar } from '../helpers/';
 
 const app = document.querySelector('#app');
+
+const TypeEvent = {
+  edit: 'edit',
+  archive: 'archive',
+  unarchive: 'unarchive',
+  delete: 'delete',
+  'toggle-archive': 'toggle-archive',
+  'toggle-active': 'toggle-active',
+  'toggle-delete': 'toggle-delete',
+};
 
 const headCells = [
   { text: 'Name', align: 'left' },
@@ -19,11 +29,25 @@ const headCells = [
   { text: 'Dates' },
 ];
 
-const createTableHead = () => {
+const getIconButtonModeArchived = (modeArchived) => {
+  const type = modeArchived ? TypeEvent['toggle-active'] : TypeEvent['toggle-archive'];
+  const icon = modeArchived ? 'unarchive' : 'archive';
+
+  return IconButton({ type, children: Icon(icon) });
+};
+
+const getIconButtonArchive = (modeArchived, id) => {
+  const type = modeArchived ? TypeEvent.unarchive : TypeEvent.archive;
+  const icon = modeArchived ? 'unarchive' : 'archive';
+
+  return IconButton({ type, id, children: Icon(icon) });
+};
+
+const createTableHead = (modeArchived) => {
   const tableHead = TableHead();
   const row = TableRow();
 
-  const categoryAvatarCell = TableCell({ className: 'w60' });
+  const categoryAvatarCell = TableCell();
   row.appendChild(categoryAvatarCell);
 
   headCells.forEach(({ text, align }) => {
@@ -32,9 +56,9 @@ const createTableHead = () => {
   });
 
   // Actions head
-  const iconsCell = TableCell({ align: 'center', className: 'icons-cell' });
-  iconsCell.appendChild(IconButton({ children: Icon('archive') }));
-  iconsCell.appendChild(IconButton({ children: Icon('delete') }));
+  const iconsCell = TableCell({ align: 'center' });
+  iconsCell.appendChild(getIconButtonModeArchived(modeArchived));
+  iconsCell.appendChild(IconButton({ type: TypeEvent['toggle-delete'], children: Icon('delete') }));
   row.appendChild(iconsCell);
 
   tableHead.appendChild(row);
@@ -42,7 +66,7 @@ const createTableHead = () => {
   return tableHead;
 };
 
-const createTableBody = (value) => {
+const createTableBody = (modeArchived, value) => {
   const tableBody = TableBody();
   value.forEach(({ id, name, created, category, content, dates }) => {
     const row = TableRow();
@@ -68,9 +92,9 @@ const createTableBody = (value) => {
 
     // Actions row
     const iconsCell = TableCell();
-    iconsCell.appendChild(IconButton({ type: 'edit', id, children: Icon('edit') }));
-    iconsCell.appendChild(IconButton({ type: 'archive', id, children: Icon('archive') }));
-    iconsCell.appendChild(IconButton({ type: 'delete', id, children: Icon('delete') }));
+    iconsCell.appendChild(IconButton({ type: TypeEvent.edit, id, children: Icon('edit') }));
+    iconsCell.appendChild(getIconButtonArchive(modeArchived, id));
+    iconsCell.appendChild(IconButton({ type: TypeEvent.delete, id, children: Icon('delete') }));
     row.appendChild(iconsCell);
 
     tableBody.appendChild(row);
@@ -83,15 +107,31 @@ const handleEvent = ({ target }) => {
   const { type, id } = target.dataset;
 
   switch (type) {
-    case 'edit':
+    case TypeEvent.edit:
       break;
 
-    case 'archive':
+    case TypeEvent.archive:
       store.dispatch(archiveNote(id));
       break;
 
-    case 'delete':
+    case TypeEvent.unarchive:
+      store.dispatch(unarchiveNote(id));
+      break;
+
+    case TypeEvent.delete:
       store.dispatch(deleteNote(id));
+      break;
+
+    case TypeEvent['toggle-archive']:
+      store.dispatch(setModeActived(true));
+      break;
+
+    case TypeEvent['toggle-active']:
+      store.dispatch(setModeActived(false));
+      break;
+
+    case TypeEvent['toggle-delete']:
+      console.log('Opps!');
       break;
 
     default:
@@ -100,8 +140,8 @@ const handleEvent = ({ target }) => {
 };
 
 const ListNotes = (store) => {
-  const { notes = [] } = store;
-  const activeNotes = notes.filter(({ archived }) => !archived);
+  const { notes = [], modeArchived = false } = store;
+  const filteredNotes = notes.filter(({ archived = false }) => archived === modeArchived);
 
   // Cumulative Layout Shift
   const btn = document.querySelector('#btnCreateNote');
@@ -109,27 +149,24 @@ const ListNotes = (store) => {
   btn.remove();
 
   let table = document.querySelector('#listNotes');
-  if (!table) {
-    // Create
-    const tableHead = createTableHead();
-    table = Table({
-      className: 'table-striped table-hover',
-      children: tableHead,
-    });
-    table.setAttribute('id', 'listNotes');
-  }
+  table?.remove();
 
-  // Always clear tbody (only tbody for performance)
-  const tbody = document.querySelector('#listNotes > tbody');
-  tbody?.removeEventListener('click', handleEvent);
-  tbody?.remove();
+  // Create
+  const tableHead = createTableHead(modeArchived);
+  table = Table({
+    className: 'table-striped table-hover',
+    children: tableHead,
+  });
+  table.setAttribute('id', 'listNotes');
 
-  const tableBody = createTableBody(activeNotes);
-  tableBody.addEventListener('click', handleEvent);
+  const tableBody = createTableBody(modeArchived, filteredNotes);
   table.appendChild(tableBody);
 
   app.appendChild(table);
   app.appendChild(btnCreateNote);
+
+  // EventListener
+  table.addEventListener('click', handleEvent);
 };
 
 export default ListNotes;

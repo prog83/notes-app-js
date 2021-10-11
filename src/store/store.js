@@ -2,7 +2,7 @@ import reducer from './reducer';
 
 const initialState = {
   notes: [],
-  archived: false,
+  modeArchived: false,
 };
 
 class Store {

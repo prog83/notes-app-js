@@ -5,6 +5,7 @@ const constants = {
   NOTE_UPDATE: 'note/update',
   NOTE_DELETE: 'note/delete',
   NOTE_ARCHIVE: 'note/archive',
+  NOTE_UNARCHIVE: 'note/unarchive',
 };
 
 export default constants;

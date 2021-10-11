@@ -21,13 +21,43 @@ tbody > tr > * {
   color: rgba(255, 255, 255, 1);
 }
 
-.w60 {
-  width: 60px;
+#listNotes {
+  thead > tr > * {
+    &:nth-child(1) {
+      width: 60px;
+      min-width: 60px;
+    }
+    &:nth-child(2) {
+      width: 200px;
+    }
+    &:nth-child(3) {
+      width: 150px;
+    }
+    &:nth-child(4) {
+      width: 200px;
+    }
+    &:nth-child(6) {
+      width: 200px;
+    }
+    &:nth-child(7) {
+      width: 165px;
+      min-width: 165px;
+    }
+  }
 }
 
-#listNotes {
-  .icons-cell {
-    width: 165px;
+#summaryNotes {
+  thead > tr > * {
+    &:nth-child(1) {
+      width: 60px;
+      min-width: 60px;
+    }
+    &:nth-child(3) {
+      width: 25%;
+    }
+    &:nth-child(4) {
+      width: 25%;
+    }
   }
 }
 
