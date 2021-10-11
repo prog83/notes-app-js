@@ -46,14 +46,18 @@ const createTableBody = (value) => {
   return tableBody;
 };
 
-const SummaryNotes = (store) => {
-  const { notes = [] } = store;
-  const summary = groupBy(notes, 'category');
-  const sortedSummary = Object.entries(summary).sort((a, b) => {
+const getSortedSummaryNotes = (notes, field) => {
+  const summary = groupBy(notes, field);
+  return Object.entries(summary).sort((a, b) => {
     const countA = a[1].length;
     const countB = b[1].length;
     return countB - countA;
   });
+};
+
+const SummaryNotes = (store) => {
+  const { notes = [] } = store;
+  const sortedSummary = getSortedSummaryNotes(notes, 'category');
 
   let table = document.querySelector('#summaryNotes');
   if (!table) {

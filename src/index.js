@@ -6,13 +6,13 @@ import SummaryNotes from './components/SummaryNotes';
 
 import store from './store';
 import { initNotes } from './store/actions';
-import initData from './helpers/initData';
-import schema from './helpers/schema';
 
-// Type cast
-const notes = schema.cast(initData);
+import schema from './helpers/schema';
+import db from './db.json';
 
 store.subscribe(ListNotes);
 store.subscribe(SummaryNotes);
 
+// Type cast
+const notes = schema.cast(db);
 store.dispatch(initNotes(notes));

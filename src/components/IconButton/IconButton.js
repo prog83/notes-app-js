@@ -9,8 +9,8 @@ const IconButton = ({ type, id, className, children }) => {
   if (id || id === 0) {
     element.dataset.id = id;
   }
-  const styles = ['icon-button', type, className].filter((i) => i).join(' ');
-  element.className = styles;
+  const classes = ['icon-button', type, className].filter((i) => i).join(' ');
+  element.className = classes;
 
   if (children) {
     element.appendChild(children);

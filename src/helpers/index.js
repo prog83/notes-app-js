@@ -23,6 +23,6 @@ export const getCategoryAvatar = (value) => {
 export const groupBy = (array, key) =>
   array.reduce((acc, item) => {
     const rslt = { ...acc };
-    (rslt[item[key]] = rslt[item[key]] || []).push(item);
+    (rslt[item[key]] = rslt[item[key]] ?? []).push(item);
     return rslt;
   }, {});

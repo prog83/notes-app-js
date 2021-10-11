@@ -1,24 +1,29 @@
 import constants from './constants';
 
-const insert = (array, value) => {
-  const newArray = [...array];
-  newArray.push(value);
-  return newArray;
+const getNoteById = (notes, id) => {
+  const [rslt] = notes.filter((note) => note.id === Number.parseInt(id, 10));
+  return rslt;
 };
 
-const update = (array, value) =>
-  array.map((item) => {
-    if (item.id !== Number.parseInt(value.id, 10)) {
-      return item;
+const insert = (notes, value) => {
+  const newNotes = [...notes];
+  newNotes.push(value);
+  return newNotes;
+};
+
+const update = (notes, value) =>
+  notes.map((note) => {
+    if (note.id !== Number.parseInt(value.id, 10)) {
+      return note;
     }
 
     return {
-      ...item,
+      ...note,
       ...value,
     };
   });
 
-const del = (array, value) => array.filter(({ id }) => id !== Number.parseInt(value, 10));
+const remove = (notes, value) => notes.filter(({ id }) => id !== Number.parseInt(value, 10));
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -43,11 +48,11 @@ const reducer = (state = {}, action) => {
     case constants.NOTE_DELETE:
       return {
         ...state,
-        notes: del(state.notes, action.payload),
+        notes: remove(state.notes, action.payload),
       };
 
     case constants.NOTE_ARCHIVE: {
-      const [note] = state.notes.filter(({ id }) => id === Number.parseInt(action.payload, 10));
+      const note = getNoteById(state.notes, action.payload);
 
       return {
         ...state,

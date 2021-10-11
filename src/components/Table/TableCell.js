@@ -1,8 +1,8 @@
 const TableCell = ({ type = 'td', align = 'left', className, value } = {}) => {
   const element = document.createElement(type);
-  const styles = [align === 'center' ? 'text-center' : '', className].filter((i) => i).join(' ');
-  if (styles) {
-    element.className = styles;
+  const classes = [align === 'center' ? 'text-center' : '', className].filter((i) => i).join(' ');
+  if (classes) {
+    element.className = classes;
   }
 
   element.textContent = value;
