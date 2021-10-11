@@ -1,6 +1,11 @@
 import Avatar from '../components/Avatar';
 import Icon from '../components/Icon';
 
+export const getNoteById = (notes, id) => {
+  const [rslt] = notes.filter((note) => note.id === id);
+  return rslt;
+};
+
 export const getCategoryAvatar = (value) => {
   switch (value) {
     case 'Task':
@@ -26,3 +31,16 @@ export const groupBy = (array, key) =>
     (rslt[item[key]] = rslt[item[key]] ?? []).push(item);
     return rslt;
   }, {});
+
+export const searchDatesFromText = (text) => {
+  const rslt = [];
+  const re = /(?:\d{1,2}\/\d{1,2}\/\d{4})|(?:\d{1,2}\-\d{1,2}\-\d{4})|(?:\d{1,2}\.\d{1,2}\.\d{4})/g;
+
+  let date = null;
+  while ((date = re.exec(text)) !== null) {
+    rslt.push(date[0]);
+    text.lastIndex;
+  }
+
+  return rslt.map((dt) => (Date.parse(dt) ? new Date(dt) : null)).filter((i) => i);
+};

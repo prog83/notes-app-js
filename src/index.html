@@ -22,14 +22,14 @@
       type="button"
       class="btn btn-primary d-block ms-auto"
       data-bs-toggle="modal"
-      data-bs-target="#CreateNoteModal"
+      data-bs-target="#createNoteModal"
     >
       Create Note
     </button>
 
     <div
       class="modal fade"
-      id="CreateNoteModal"
+      id="createNoteModal"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabindex="-1"
@@ -39,14 +39,54 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Note</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">...</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Understood</button>
-          </div>
+          <form>
+            <div class="modal-body">
+              <input hidden name="id" type="text" />
+              <div class="mb-3">
+                <label class="form-label"
+                  >Name
+                  <input
+                    required
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    aria-label="Name"
+                    aria-describedby="name"
+                  />
+                </label>
+              </div>
+              <div class="mb-3">
+                <label class="form-label"
+                  >Category
+                  <select required name="category" class="form-select" aria-label="Default select example">
+                    <option value="Task">Task</option>
+                    <option value="Random Thought">Random Thought</option>
+                    <option value="Idea">Idea</option>
+                    <option value="Quote">Quote</option>
+                  </select>
+                </label>
+              </div>
+              <div>
+                <label class="form-label"
+                  >Content
+                  <textarea
+                    rows="3"
+                    name="content"
+                    class="form-control"
+                    aria-label="Content"
+                    aria-describedby="content"
+                  ></textarea>
+                </label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

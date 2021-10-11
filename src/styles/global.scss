@@ -34,11 +34,11 @@ tbody > tr > * {
       width: 150px;
     }
     &:nth-child(4) {
-      width: 200px;
+      width: 150px;
     }
-    &:nth-child(6) {
-      width: 200px;
-    }
+    // &:nth-child(6) {
+    //   width: 200px;
+    // }
     &:nth-child(7) {
       width: 165px;
       min-width: 165px;
@@ -66,4 +66,8 @@ tbody > tr > * {
   .avatar {
     background-color: $gray-600;
   }
+}
+
+#createNoteModal label {
+  display: block;
 }

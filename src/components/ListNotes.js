@@ -9,6 +9,8 @@ import { archiveNote, unarchiveNote, deleteNote, setModeActived } from '../store
 
 import { getCategoryAvatar } from '../helpers/';
 
+import { modalDialogInstance, fillDataForm } from './NoteDialog';
+
 const app = document.querySelector('#app');
 
 const TypeEvent = {
@@ -71,7 +73,7 @@ const createTableBody = (modeArchived, value) => {
   value.forEach(({ id, name, created, category, content, dates }) => {
     const row = TableRow();
     const createdText = format(created, 'MMMM dd, yyyy');
-    const datesText = dates.map((date) => format(date, 'M/d/yyyy')).join(', ');
+    const datesText = dates?.map((date) => format(date, 'M/d/yyyy')).join(', ');
 
     // Category avatar
     const avatar = getCategoryAvatar(category);
@@ -108,6 +110,7 @@ const handleEvent = ({ target }) => {
 
   switch (type) {
     case TypeEvent.edit:
+      modalDialogInstance.show(target);
       break;
 
     case TypeEvent.archive:
@@ -142,11 +145,6 @@ const handleEvent = ({ target }) => {
 const ListNotes = (store) => {
   const { notes = [], modeArchived = false } = store;
   const filteredNotes = notes.filter(({ archived = false }) => archived === modeArchived);
-
-  // Cumulative Layout Shift
-  const btn = document.querySelector('#btnCreateNote');
-  const btnCreateNote = btn.cloneNode(true);
-  btn.remove();
 
   let table = document.querySelector('#listNotes');
   table?.remove();

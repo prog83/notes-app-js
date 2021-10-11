@@ -1,9 +1,5 @@
 import constants from './constants';
-
-const getNoteById = (notes, id) => {
-  const [rslt] = notes.filter((note) => note.id === Number.parseInt(id, 10));
-  return rslt;
-};
+import { getNoteById } from '../helpers';
 
 const insert = (notes, value) => {
   const newNotes = [...notes];
@@ -13,7 +9,7 @@ const insert = (notes, value) => {
 
 const update = (notes, value) =>
   notes.map((note) => {
-    if (note.id !== Number.parseInt(value.id, 10)) {
+    if (note.id !== value.id) {
       return note;
     }
 
@@ -23,7 +19,7 @@ const update = (notes, value) =>
     };
   });
 
-const remove = (notes, value) => notes.filter(({ id }) => id !== Number.parseInt(value, 10));
+const remove = (notes, value) => notes.filter(({ id }) => id !== value);
 
 const reducer = (state = {}, action) => {
   switch (action.type) {
@@ -31,7 +27,6 @@ const reducer = (state = {}, action) => {
       return { ...state, notes: action.payload };
 
     case constants.MODE_ARCHIVED:
-      console.log(action.payload);
       return { ...state, modeArchived: action.payload };
 
     case constants.NOTE_CREATE:
@@ -53,7 +48,6 @@ const reducer = (state = {}, action) => {
       };
 
     case constants.NOTE_ARCHIVE: {
-      console.log(action.payload);
       const note = getNoteById(state.notes, action.payload);
 
       return {

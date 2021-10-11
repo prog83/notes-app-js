@@ -1,7 +1,7 @@
-import { object, array, string, number, boolean, date } from 'yup';
+import { object, array, string, boolean, date } from 'yup';
 
 const note = object().shape({
-  id: number().required(),
+  id: string().required(),
   archived: boolean(),
   name: string().required(),
   created: date().required(),
