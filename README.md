@@ -1,8 +1,8 @@
-# notes-app
+# notes-app-js
 
 Notes App
 
-GitHub Pages [demo](https://prog83.github.io/notes-app-js).
+GitHub Pages - [demo](https://prog83.github.io/notes-app-js).
 
 ## Installation
 
