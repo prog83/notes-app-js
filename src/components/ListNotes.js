@@ -9,7 +9,7 @@ import { archiveNote, unarchiveNote, deleteNote, setModeActived } from '../store
 
 import { getCategoryAvatar } from '../helpers/';
 
-import { modalDialogInstance, fillDataForm } from './NoteDialog';
+import { modalDialogInstance } from './NoteDialog';
 
 const app = document.querySelector('#app');
 
@@ -70,7 +70,7 @@ const createTableHead = (modeArchived) => {
 
 const createTableBody = (modeArchived, value) => {
   const tableBody = TableBody();
-  value.forEach(({ id, name, created, category, content, dates }) => {
+  value.forEach(({ id, name, created, category, content, dates, archived }) => {
     const row = TableRow();
     const createdText = format(created, 'MMMM dd, yyyy');
     const datesText = dates?.map((date) => format(date, 'M/d/yyyy')).join(', ');
@@ -95,7 +95,7 @@ const createTableBody = (modeArchived, value) => {
     // Actions row
     const iconsCell = TableCell();
     iconsCell.appendChild(IconButton({ type: TypeEvent.edit, id, children: Icon('edit') }));
-    iconsCell.appendChild(getIconButtonArchive(modeArchived, id));
+    iconsCell.appendChild(getIconButtonArchive(archived, id));
     iconsCell.appendChild(IconButton({ type: TypeEvent.delete, id, children: Icon('delete') }));
     row.appendChild(iconsCell);
 
@@ -147,7 +147,10 @@ const ListNotes = (store) => {
   const filteredNotes = notes.filter(({ archived = false }) => archived === modeArchived);
 
   let table = document.querySelector('#listNotes');
-  table?.remove();
+  if (table) {
+    table.removeEventListener('click', handleEvent);
+    table.remove();
+  }
 
   // Create
   const tableHead = createTableHead(modeArchived);

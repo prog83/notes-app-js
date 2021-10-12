@@ -29,6 +29,7 @@ export const groupBy = (array, key) =>
   array.reduce((acc, item) => {
     const rslt = { ...acc };
     (rslt[item[key]] = rslt[item[key]] ?? []).push(item);
+
     return rslt;
   }, {});
 
@@ -39,7 +40,6 @@ export const searchDatesFromText = (text) => {
   let date = null;
   while ((date = re.exec(text)) !== null) {
     rslt.push(date[0]);
-    text.lastIndex;
   }
 
   return rslt.map((dt) => (Date.parse(dt) ? new Date(dt) : null)).filter((i) => i);
