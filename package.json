@@ -31,7 +31,7 @@
     "nwb-sass": "^0.10.2",
     "prettier": "^2.4.1"
   },
-  "author": "",
+  "author": "o.myronov",
   "license": "MIT",
   "homepage": "https://github.com/prog83/notes-app-js",
   "repository": {
