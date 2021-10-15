@@ -29,17 +29,21 @@ export const groupBy = (array, key) =>
   array.reduce((acc, item) => {
     const rslt = { ...acc };
     (rslt[item[key]] = rslt[item[key]] ?? []).push(item);
+
     return rslt;
   }, {});
 
 export const searchDatesFromText = (text) => {
+  if (text) {
+    return;
+  }
+
   const rslt = [];
   const re = /(?:\d{1,2}\/\d{1,2}\/\d{4})|(?:\d{1,2}\-\d{1,2}\-\d{4})|(?:\d{1,2}\.\d{1,2}\.\d{4})/g;
 
   let date = null;
   while ((date = re.exec(text)) !== null) {
     rslt.push(date[0]);
-    text.lastIndex;
   }
 
   return rslt.map((dt) => (Date.parse(dt) ? new Date(dt) : null)).filter((i) => i);
