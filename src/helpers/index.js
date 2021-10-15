@@ -34,6 +34,10 @@ export const groupBy = (array, key) =>
   }, {});
 
 export const searchDatesFromText = (text) => {
+  if (text) {
+    return;
+  }
+
   const rslt = [];
   const re = /(?:\d{1,2}\/\d{1,2}\/\d{4})|(?:\d{1,2}\-\d{1,2}\-\d{4})|(?:\d{1,2}\.\d{1,2}\.\d{4})/g;
 
